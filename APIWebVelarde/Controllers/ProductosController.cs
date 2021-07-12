@@ -1,4 +1,5 @@
 ﻿using APIWebVelarde.Helpers;
+using APIWebVelarde.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,7 +25,19 @@ namespace APIWebVelarde.Controllers
 
             var pro = db.Productos.Include(c=> c.categoria);
 
-            Resultado.Info = pro;
+            var lista = pro.Select(p => new ProductosViewModel
+                {
+                    id = p.id,
+                    nombre = p.nombre,
+                    codigo = p.codigo,
+                    descripcion = p.descripcion,
+                    existencia = p.existencia,
+                    idcategoria = p.idcategoria,
+                    nombre_categoria = p.categoria.nombre
+                }
+            );;
+
+            Resultado.Info = lista;
 
             return Ok(Resultado);
         }

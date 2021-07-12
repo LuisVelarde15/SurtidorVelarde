@@ -21,9 +21,10 @@ namespace APIWebVelarde.Controllers
         [HttpGet("Todos los podructos")]
         public ActionResult MostrarTodos()
         {
-            var prods = db.Productos.Include(c=> c.categoria);
 
-            Resultado.Info = prods;
+            var pro = db.Productos.Include(c=> c.categoria);
+
+            Resultado.Info = pro;
 
             return Ok(Resultado);
         }

@@ -17,7 +17,7 @@ namespace APIWebVelarde.Helpers
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string Conexion = @"Server =surtidorvelarde.database.windows.net;
+            string Conexion = @"Server = surtidorvelarde.database.windows.net;
                                 Database = surtidorvelardedb; 
                                 User = admindb; 
                                 Password =luis1598*;";

@@ -13,6 +13,7 @@ namespace APIWebVelarde.Helpers
         public DbSet<Roles> Roles { get; set; } //Tabla Roles de la base de datos
         public DbSet<Clientes> Clientes { get; set; } //Tabla Clietnes de la base de datos
         public DbSet<Provedores> Proveedores { get; set; } //Tabla Provedores les de la base de datos
+        public DbSet<Producto> productos { get; set; } //Tabla Provedores les de la base de datos
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

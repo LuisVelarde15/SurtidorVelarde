@@ -98,9 +98,14 @@ namespace APIWebVelarde.Controllers
                 else
                 {
                     resultado.Estado = false;
-                    string errores = "";
-                    errores = ModelState.Values.First().Errors[0].ErrorMessage;
-                    resultado.Mensaje = errores;
+                    string MensajeError = "";
+                    
+                    foreach(var error in ModelState.Values)
+                    {
+                        MensajeError += ( error.Errors[0].ErrorMessage);
+                        MensajeError += "  |  ";
+                    }
+                    resultado.Mensaje = MensajeError; ;
                 }
 
             }

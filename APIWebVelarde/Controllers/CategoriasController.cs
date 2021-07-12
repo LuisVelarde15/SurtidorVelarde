@@ -4,6 +4,7 @@ using APIWebVelarde.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -87,10 +88,20 @@ namespace APIWebVelarde.Controllers
         {
             try
             {
-                Categoria nueva = new Categoria(c);//No le muestro el ID para que no lo cambie ni la variable Activo
-                db.Categorias.Add(nueva);
-                db.SaveChanges();
-                resultado.Info = new CategoriaIdViewModel(nueva);//Muestro el ID junto con los datos nuevos agregados
+                if (ModelState.IsValid)
+                {
+                    Categoria nueva = new Categoria(c);//No le muestro el ID para que no lo cambie ni la variable Activo
+                    db.Categorias.Add(nueva);
+                    db.SaveChanges();
+                    resultado.Info = new CategoriaIdViewModel(nueva);//Muestro el ID junto con los datos nuevos agregados
+                }
+                else
+                {
+                    resultado.Estado = false;
+                    string errores = "";
+                    errores = ModelState.Values.First().Errors[0].ErrorMessage;
+                    resultado.Mensaje = errores;
+                }
 
             }
             catch (Exception)

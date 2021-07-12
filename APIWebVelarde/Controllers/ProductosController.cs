@@ -1,5 +1,6 @@
 ﻿using APIWebVelarde.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace APIWebVelarde.Controllers
         [HttpGet("Todos los podructos")]
         public ActionResult MostrarTodos()
         {
-            var prods = db.Productos;
+            var prods = db.Productos.Include(c=> c.categoria);
 
             Resultado.Info = prods;
 

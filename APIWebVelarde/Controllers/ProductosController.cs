@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using APIWebVelarde.Helpers;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,18 @@ namespace APIWebVelarde.Controllers
     [ApiController]
     public class ProductosController : ControllerBase
     {
+        Datos db = new Datos();
+        Respuesta Resultado = new Respuesta();
+
         // GET: api/<ProductosController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("Todos los podructos")]
+        public ActionResult MostrarTodos()
         {
-            return new string[] { "value1", "value2" };
+            var prods = db.Productos;
+
+            Resultado.Info = prods;
+
+            return Ok(Resultado);
         }
 
         // GET api/<ProductosController>/5

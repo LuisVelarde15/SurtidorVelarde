@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APIWebVelarde.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -20,9 +21,19 @@ namespace APIWebVelarde.Models
         public bool activo { get; set; }
         public Categoria categoria { get; set; }//Objeto de relacion a Categoria
 
-
         public Producto()
         {
+        }
+
+        public Producto(ProductoNuevoViewModel p)
+        {
+            this.activo = true;
+            this.codigo = p.codigo;
+            this.descripcion = p.descripcion;
+            this.existencia = p.existencia;
+            this.idcategoria = p.idcategoria;
+            this.nombre = p.nombre;
+            this.precio_venta = p.precio_venta;
         }
 
 

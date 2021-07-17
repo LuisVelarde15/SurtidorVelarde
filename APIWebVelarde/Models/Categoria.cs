@@ -36,7 +36,6 @@ namespace APIWebVelarde.Models
         {
             this.nombre = c.nombre;
             this.descripcion = c.descripcion;
-            this.activo = true;
         }
        
     }

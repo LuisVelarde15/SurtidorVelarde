@@ -35,14 +35,23 @@
                 <td> {{index + 1}}</td>
                 <td> {{item.nombre}}</td>
                 <td> {{item.descripcion}}</td>
-                <!-- <td> {{item.activo}}</td>-->
                 <td>
-                    <div v-if="item.activo==true">
-                        <span class="text-success">Activo</span>
-                    </div>
-                    <div v-else>
-                        <span class="text-danger">Inactivo</span>
-                    </div>
+                    <span>
+                        <button class="btn btn-danger btn-sm" v-on:click="Inactivar(item)">
+                            Inactivar
+                        </button>
+                    </span>
+
+                    <span>
+                        <button class="btn btn-success btn-sm" v-on:click="Activar(item)">
+                            Activar
+                        </button>
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm" v-on:click="mostrarEditarCategoria(item)">
+                        Editar
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -78,81 +87,170 @@
         </div>
     </div>
 
-</div>
 
 
-@section Scripts{
+    <!--Editar Categoria -->
+    <div class="modal" id="MostrarEditarCategoriaModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                categorias: [],
-                id: null,
-                nombre: "",
-                descripcion: "",
-                activo: null,
-                index: null
-            },
-            created: function () {
-                this.obtenerCategorias();
-            },
-            methods: {
-                obtenerCategorias: function () {
-                    var vm = this;
-                    $.ajax({
-                        url: "https://surtidorvelardeapi.azurewebsites.net/api/Categorias",
-                        method: "GET",
-                        dataType: 'JSON'
-                    })
-                        .done(function (resultado) {
-                            if (resultado.estado == true) {
-                                vm.categorias = resultado.datos;
-                                toastr.success("Datos cargados satisfactoriamente");
-                            }
-                            else
-                                toastr.error(resultado.mensaje);
-                            $("#cargando").hide();
-                        });
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input v-model="nombre" type="text" class="form-control" style="width:100%" />
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <input v-model="descripcion" type="text" class="form-control" style="width:100%" />
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" v-on:click="guardarEditarCategoria">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    @section Scripts{
+
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    categorias: [],
+                    id: null,
+                    nombre: "",
+                    descripcion: "",
+                    activo: null,
+                    index: null
                 },
-                mostrarNuevaCategoria: function () {
-                    this.nombre = "";
-                    this.descripcion = "";
-                    $("#NuevaCategoriaModal").modal('show');
+                created: function () {
+                    this.BuscarCategorias();
                 },
-                guardarNuevaCategoria: function () {
-                    var vm = this;
-                    var nuevaCategoria = {
-                        nombre: vm.nombre,
-                        descripcion: vm.descripcion
+                methods: {
+                    BuscarCategorias: function () {
+                        var vm = this;
+                        $.ajax({
+                            url: "https://surtidorvelardeapi.azurewebsites.net/api/Categorias",
+                            method: "GET",
+                            dataType: 'JSON'
+                        })
+                            .done(function (resultado) {
+                                if (resultado.estado == true) {
+                                    vm.categorias = resultado.info.$values;
+                                    toastr.success("Datos cargados satisfactoriamente");
+                                }
+                                else
+                                    toastr.error(resultado.mensaje);
+                                $("#cargando").hide();
+                            });
+                    },
+                    mostrarNuevaCategoria: function () {
+                        this.nombre = "";
+                        this.descripcion = "";
+                        $("#NuevaCategoriaModal").modal('show');
+                    },
+                    guardarNuevaCategoria: function () {
+                        var vm = this;
+                        var nuevaCategoria = {
+                            nombre: vm.nombre,
+                            descripcion: vm.descripcion
+                        }
+                        $.ajax({
+                            url: "https://surtidorvelardeapi.azurewebsites.net/api/NuevaCategorias",
+                            data: JSON.stringify(nuevaCategoria),
+                            method: "POST",
+                            contentType: 'application/json',
+                            dataType: 'JSON'
+                        })
+                            .done(function (resultado) {
+                                if (resultado.estado == true) {
+                                    toastr.success("Categoria guardada satisfactoriamente");
+                                    $("#NuevaCategoriaModal").modal('hide');
+                                    vm.obtenerCategorias();
+                                }
+                                else
+                                    toastr.error(resultado.mensaje);
+                            });
+                    },
+                    mostrarEditarCategoria: function (item) {
+                        this.id = item.id;
+                        this.nombre = item.nombre;
+                        this.descripcion = item.descripcion;
+                        $("#MostrarEditarCategoriaModal").modal('show');
+                    },
+
+                    guardarEditarCategoria: function () {
+                        var vm = this;
+                        var modificaCategoria = {
+                            nombre: vm.nombre,
+                            descripcion: vm.descripcion
+                        }
+                        $.ajax({
+                            url: "https://surtidorvelardeapi.azurewebsites.net/api/ActualizarCategorias" + vm.id,
+                            data: JSON.stringify(modificaCategoria),
+                            method: "PUT",
+                            contentType: 'application/json',
+                            dataType: 'JSON'
+                        })
+                            .done(function (resultado) {
+                                if (resultado.estado == true) {
+                                    toastr.success("Categoria actualizada satisfactoriamente");
+                                    $("#MostrarEditarCategoriaModal").modal('hide');
+                                    vm.obtenerCategorias();
+                                }
+                                else
+                                    toastr.error(resultado.mensaje);
+                            });
+                    },
+                    Inactivar: function (item) {
+                        var vm = this;
+
+                        $.ajax({
+                            url: "https://surtidorvelardeapi.azurewebsites.net/api/InactivarCategorias" + item.id,
+                            //data: JSON.stringify(nuevaCategoria),
+                            method: "DELETE",
+                            contentType: 'application/json',
+                            dataType: 'JSON'
+                        })
+                            .done(function (resultado) {
+                                if (resultado.estado == true) {
+                                    toastr.success("Categoria inactivada");
+                                    vm.obtenerCategorias();
+                                }
+                                else
+                                    toastr.error(resultado.mensaje);
+                            });
+                    },
+                    Activar: function (item) {
+                        var vm = this;
+                        $.ajax({
+                            url: "https://surtidorvelardeapi.azurewebsites.net/api/ActivarCategorias" + item.id,
+                            // data: JSON.stringify(nuevaCategoria),
+                            method: "DELETE",
+                            contentType: 'application/json',
+                            dataType: 'JSON'
+                        })
+                            .done(function (resultado) {
+                                if (resultado.estado == true) {
+                                    toastr.success("Categoria activada");
+                                    vm.obtenerCategorias();
+                                }
+                                else
+                                    toastr.error(resultado.mensaje);
+                            });
                     }
-                    $.ajax({
-                        url: "https://surtidorvelardeapi.azurewebsites.net/api/Categorias",
-                        data: JSON.stringify(nuevaCategoria),
-                        method: "POST",
-                        contentType: 'application/json',
-                        dataType: 'JSON'
-                    })
-                        .done(function (resultado) {
-                            if (resultado.estado == true) {
-                                toastr.success("Categoria guardada satisfactoriamente");
-                                $("#NuevaCategoriaModal").modal('hide');
-                                vm.obtenerCategorias();
-                            }
-                            else
-                                toastr.error(resultado.mensaje);
-                        });
-                },
-                mostrarEditarCategoria: function (item) {
-                    this.id = item.id;
-                    this.nombre = item.nombre;
-                    this.descripcion = item.descripcion;
-                    $("#MostrarEditarCategoriaModal").modal('show');
-                },
-                guardarEditarCategoria: function () {
 
                 }
-
-            }
-        });</script>
-}
+            });</script>
+    }

@@ -16,18 +16,18 @@ namespace APIWebVelarde.ViewModels
         { 
         }
 
-        public CategoriaIdViewModel(string nombre, string descripcion, bool activo)
+        public CategoriaIdViewModel(int id,string nombre, string descripcion, bool activo)
         {
+            this.id = id;
             this.nombre = nombre;
             this.descripcion = descripcion;
             this.activo = activo;
         }
         public CategoriaIdViewModel(Categoria c)
         {
-            this.id = c.id;
+            
             this.nombre = c.nombre;
             this.descripcion = c.descripcion;
-            this.activo = c.activo;
 
         }
         

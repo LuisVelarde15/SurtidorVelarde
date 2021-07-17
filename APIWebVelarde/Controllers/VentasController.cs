@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using APIWeb.Helpers;
+using APIWebVelarde.Helpers;
 using APIWeb.Models;
 using APIWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +20,7 @@ namespace APIWeb.Controllers
             Respuesta Resultado = new Respuesta();
             Datos db = new Datos();
             var ventas = from v in db.Ventas
-                         join dv in db.Ventas_Detalles
+                         join dv in db.Venta_Detalle
                            on v.id equals dv.idventa
                          select new
                          {
@@ -77,7 +77,7 @@ namespace APIWeb.Controllers
                     descuento = d.descuento
                 };
 
-                db.Ventas_Detalles.Add(detalle);
+                db.Venta_Detalle.Add(detalle);
             }
             db.SaveChanges();
 

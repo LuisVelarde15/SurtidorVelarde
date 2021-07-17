@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace APIWebVelarde
@@ -26,12 +27,27 @@ namespace APIWebVelarde
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Creamos la regla de acceso a la API
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyMethod()
+                                      .AllowAnyHeader()
+                                      .SetIsOriginAllowed(_ => true)
+                                      //.AllowAnyOrigin().
+                                      .AllowCredentials());
+            });
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIWebVelarde", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIWeb", Version = "v1" });
             });
+
+            services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,10 +57,10 @@ namespace APIWebVelarde
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "APIWebVelarde v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "APIWeb v1"));
             }
-
-            app.UseHttpsRedirection();
+            // Aplica la regla
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 

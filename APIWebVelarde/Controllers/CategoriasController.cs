@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace APIWebVelarde.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class CategoriasController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace APIWebVelarde.Controllers
         Respuesta resultado = new Respuesta();
 
         // GET: api/Categorias/Todos
-        [HttpGet("Todas las Categorias")]
+        [HttpGet("Categorias")]
         public ActionResult<string> BuscarTodos()
         {
             //return new string[] { "Jose", "Jorge","Luis" };            

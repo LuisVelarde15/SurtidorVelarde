@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Categorias";
+}
+<h1>Categorías </h1>
+
+
+<div id="app">
+
+    <!-- Lista de Categorias-->
+    <div id="cargando">
+        <img src="https://i.pinimg.com/originals/4e/b6/97/4eb697b60cf8d2ac12de99e12a444362.gif" />
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <button class="btn btn-primary" v-on:click="mostrarNuevaCategoria">
+                Agregar nueva categoria
+            </button>
+        </div>
+
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(item, index) in categorias">
+                <td> {{index + 1}}</td>
+                <td> {{item.nombre}}</td>
+                <td> {{item.descripcion}}</td>
+                <!-- <td> {{item.activo}}</td>-->
+                <td>
+                    <div v-if="item.activo==true">
+                        <span class="text-success">Activo</span>
+                    </div>
+                    <div v-else>
+                        <span class="text-danger">Inactivo</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!--Nueva Categoria -->
+    <div class="modal" id="NuevaCategoriaModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar nueva categoría</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input v-model="nombre" type="text" class="form-control" style="width:100%" />
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <input v-model="descripcion" type="text" class="form-control" style="width:100%" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" v-on:click="guardarNuevaCategoria">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                categorias: [],
+                id: null,
+                nombre: "",
+                descripcion: "",
+                activo: null,
+                index: null
+            },
+            created: function () {
+                this.obtenerCategorias();
+            },
+            methods: {
+                obtenerCategorias: function () {
+                    var vm = this;
+                    $.ajax({
+                        url: "https://surtidorvelardeapi.azurewebsites.net/api/Categorias",
+                        method: "GET",
+                        dataType: 'JSON'
+                    })
+                        .done(function (resultado) {
+                            if (resultado.estado == true) {
+                                vm.categorias = resultado.datos;
+                                toastr.success("Datos cargados satisfactoriamente");
+                            }
+                            else
+                                toastr.error(resultado.mensaje);
+                            $("#cargando").hide();
+                        });
+                },
+                mostrarNuevaCategoria: function () {
+                    this.nombre = "";
+                    this.descripcion = "";
+                    $("#NuevaCategoriaModal").modal('show');
+                }
+            }
+        });</script>
+}

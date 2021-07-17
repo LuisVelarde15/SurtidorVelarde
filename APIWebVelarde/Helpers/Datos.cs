@@ -1,4 +1,5 @@
-﻿using APIWebVelarde.Models;
+﻿using APIWeb.Models;
+using APIWebVelarde.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace APIWebVelarde.Helpers
         public DbSet<Clientes> Clientes { get; set; } //Tabla Clietnes de la base de datos
         public DbSet<Provedores> Proveedores { get; set; } //Tabla Provedores les de la base de datos
         public DbSet<Producto> Productos { get; set; } //Tabla Provedores les de la base de datos
+        public DbSet<Usuario> Usuarios { get; set; } //Tabla usuarios les de la base de datos
+        public DbSet<Venta> Ventas { get; set; } //Tabla usuarios les de la base de datos
+        public DbSet<Venta_Detalle> Venta_Detalle { get; set; } //Tabla usuarios les de la base de datos
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

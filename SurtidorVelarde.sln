@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIWebVelarde", "APIWebVelarde\APIWebVelarde.csproj", "{FD7F50DE-726A-434C-85D6-6003BDE988F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIWebVelarde", "APIWebVelarde\APIWebVelarde.csproj", "{FD7F50DE-726A-434C-85D6-6003BDE988F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebVelarde", "WebVelarde\WebVelarde.csproj", "{31F535C3-2244-4811-883D-229EC969A798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FD7F50DE-726A-434C-85D6-6003BDE988F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7F50DE-726A-434C-85D6-6003BDE988F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7F50DE-726A-434C-85D6-6003BDE988F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F535C3-2244-4811-883D-229EC969A798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F535C3-2244-4811-883D-229EC969A798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F535C3-2244-4811-883D-229EC969A798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F535C3-2244-4811-883D-229EC969A798}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

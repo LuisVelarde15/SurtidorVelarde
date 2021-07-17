@@ -16,20 +16,24 @@ namespace APIWebVelarde.ViewModels
         [Required(ErrorMessage = "Debe escribir el su puesto de trabajo")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "El campo {0} debe tener de {2} a {1} letras")]
         public string descripcion { get; set; }
+        public bool activo { get; set; }
+
 
         public CategoriaViewModel()
         {
         }
 
-        public CategoriaViewModel(string nombre, string descripcion)
+        public CategoriaViewModel(string nombre, string descripcion, bool activo)
         {
             this.nombre = nombre;
             this.descripcion = descripcion;
+            this.activo = activo;
         }
         public CategoriaViewModel(Categoria c)
         {
             this.nombre = c.nombre;
             this.descripcion = c.descripcion;
+            this.activo = c.activo;
         }
        
     }

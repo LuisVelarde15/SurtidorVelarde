@@ -18,7 +18,7 @@ namespace APIWebVelarde.Controllers
         Datos db = new Datos();//Conexion a la BD global a la base de datos para todos los metodos
         Respuesta resultado = new Respuesta();
         // GET: api/<ClientesController>
-        [HttpGet("Todos los clientes")]
+        [HttpGet("Todoslosclientes")]
         public ActionResult<string> BuscarTodos()
         {
             try
@@ -50,7 +50,7 @@ namespace APIWebVelarde.Controllers
             return Ok(resultado);
         }
         // GET api/CategoriasporId
-        [HttpGet("BuscarCliente{id}")]
+        [HttpGet("BuscarCliente/{id}")]
         public ActionResult BuscarId(int id)
         {
             try
@@ -140,7 +140,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("InactivarRol{id}")]
+        [HttpDelete("InactivarRol/{id}")]
         public ActionResult Inactivar(int id)
         {
             try
@@ -172,7 +172,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("ActivarRol{id}")]
+        [HttpDelete("ActivarRol/{id}")]
         public ActionResult Activar(int id)
         {
             try
@@ -204,7 +204,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("EliminarCategorias{id}")]
+        [HttpDelete("EliminarCategorias/{id}")]
         public ActionResult Eliminar(int id)
         {
             try

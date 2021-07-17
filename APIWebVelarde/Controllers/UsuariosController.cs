@@ -13,8 +13,8 @@ namespace APIWeb.Controllers
     public class UsuariosController : Controller
     {
         // GET: api/values
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("BuscarUsuario")]
+        public ActionResult BuscarUsuario()
         {
             Respuesta Resultado = new Respuesta();
             Datos db = new Datos();

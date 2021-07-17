@@ -19,7 +19,7 @@ namespace APIWebVelarde.Controllers
         Respuesta resultado = new Respuesta();
 
         // GET: api/Categorias/Todos
-        [HttpGet("Todos los Roles")]
+        [HttpGet("TodoslosRoles")]
         public ActionResult<string> BuscarTodos()
         {
             try
@@ -52,7 +52,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // GET api/CategoriasporId
-        [HttpGet("BuscarRoles{id}")]
+        [HttpGet("BuscarRoles/{id}")]
         public ActionResult BuscarId(int id)
         {
             try
@@ -103,7 +103,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // PUT api/Categorias/ActualizarRegistro
-        [HttpPut("ActualizarRol{id}")]
+        [HttpPut("ActualizarRol/{id}")]
         public ActionResult Actualizar(int id, [FromBody] Roles r)
         {
             try
@@ -138,7 +138,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("InactivarRol{id}")]
+        [HttpDelete("InactivarRol/{id}")]
         public ActionResult Inactivar(int id)
         {
             try
@@ -170,7 +170,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("ActivarRol{id}")]
+        [HttpDelete("ActivarRol/{id}")]
         public ActionResult Activar(int id)
         {
             try
@@ -202,7 +202,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("EliminarCategorias{id}")]
+        [HttpDelete("EliminarCategorias/{id}")]
         public ActionResult Eliminar(int id)
         {
             try

@@ -14,8 +14,8 @@ namespace APIWeb.Controllers
     [Route("api/[controller]")]
     public class VentasController : Controller
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("BuscarDetallesVentas")]
+        public ActionResult DetallesVentas()
         {
             Respuesta Resultado = new Respuesta();
             Datos db = new Datos();
@@ -48,7 +48,7 @@ namespace APIWeb.Controllers
 
         // POST api/values
             [HttpPost("[action]")]
-            public ActionResult Nueva([FromBody] VentaNuevaViewModel v)
+            public ActionResult NuevoDetalle([FromBody] VentaNuevaViewModel v)
         {
             Datos db = new Datos();
             var venta = new Venta()
@@ -85,8 +85,8 @@ namespace APIWeb.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("EditarDetalleVentas/{id}")]
+        public void ActualizarDetalleVentas(int id, [FromBody] string value)
         {
         }
 

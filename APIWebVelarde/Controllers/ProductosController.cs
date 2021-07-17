@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace APIWebVelarde.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class ProductosController : ControllerBase
     {
@@ -46,7 +46,7 @@ namespace APIWebVelarde.Controllers
 
 
         // GET: api/values
-        [HttpGet("Mostrar [action]")]
+        [HttpGet("MostrarProductos/")]
         public ActionResult Todos()
         {
             Datos db = new Datos();
@@ -69,7 +69,7 @@ namespace APIWebVelarde.Controllers
 
         }
 
-        [HttpGet("Mostrar [action]")]
+        [HttpGet("MostrarProductos2/")]
         public ActionResult Todos2()
         {
             Datos db = new Datos();
@@ -133,7 +133,7 @@ namespace APIWebVelarde.Controllers
 
 
         // POST api/values
-        [HttpPost("Agregar [action] producto")]
+        [HttpPost("Agregar[action]producto")]
         public ActionResult Nuevo([FromBody] ProductoNuevoViewModel p)
         {
             Respuesta Resultado = new Respuesta();

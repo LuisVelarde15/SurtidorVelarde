@@ -18,7 +18,7 @@ namespace APIWebVelarde.Controllers
         Datos db = new Datos();//Conexion a la BD global a la base de datos para todos los metodos
         Respuesta resultado = new Respuesta();
         // GET: api/<ProveedoresController>
-        [HttpGet("Todos los Proveedores")]
+        [HttpGet("TodoslosProveedores")]
         public ActionResult<string> BuscarTodos()
         {
             try
@@ -50,7 +50,7 @@ namespace APIWebVelarde.Controllers
             return Ok(resultado);
         }
         // GET api/CategoriasporId
-        [HttpGet("BuscarProveedor{id}")]
+        [HttpGet("BuscarProveedor/{id}")]
         public ActionResult BuscarId(int id)
         {
             try
@@ -101,7 +101,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // PUT api/Proveedores/ActualizarProveedor
-        [HttpPut("ActualizarProveedor{id}")]
+        [HttpPut("ActualizarProveedor/{id}")]
         public ActionResult Actualizar(int id, [FromBody] Provedores p)
         {
             try
@@ -140,7 +140,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("InactivarProveedor{id}")]
+        [HttpDelete("InactivarProveedor/{id}")]
         public ActionResult Inactivar(int id)
         {
             try
@@ -172,7 +172,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("ActivarProveedor{id}")]
+        [HttpDelete("ActivarProveedor/{id}")]
         public ActionResult Activar(int id)
         {
             try
@@ -204,7 +204,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("EliminarProveedor{id}")]
+        [HttpDelete("EliminarProveedor/{id}")]
         public ActionResult Eliminar(int id)
         {
             try

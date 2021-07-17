@@ -53,7 +53,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // GET api/CategoriasporId
-        [HttpGet("BuscarCategorias{id}")]
+        [HttpGet("BuscarCategorias/{id}")]
         public ActionResult BuscarId(int id)
         {
             try
@@ -120,7 +120,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // PUT api/Categorias/ActualizarRegistro
-        [HttpPut("ActualizarCategorias{id}")]
+        [HttpPut("ActualizarCategorias/{id}")]
         public ActionResult Actualizar(int id, [FromBody] Categoria c)
         {
             try
@@ -155,7 +155,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("InactivarCategorias{id}")]
+        [HttpDelete("InactivarCategorias/{id}")]
         public ActionResult Inactivar(int id)
         {
             try
@@ -187,7 +187,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("ActivarCategorias{id}")]
+        [HttpDelete("ActivarCategorias/{id}")]
         public ActionResult Activar(int id)
         {
             try
@@ -219,7 +219,7 @@ namespace APIWebVelarde.Controllers
         }
 
         // DELETE api/<CategoriasController>/5
-        [HttpDelete("EliminarCategorias{id}")]
+        [HttpDelete("EliminarCategorias/{id}")]
         public ActionResult Eliminar(int id)
         {
             try

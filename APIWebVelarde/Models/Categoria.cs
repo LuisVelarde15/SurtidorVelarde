@@ -20,7 +20,6 @@ namespace APIWebVelarde.Models
         [Required(ErrorMessage = "Debe escribir el su puesto de trabajo")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "El campo {0} debe tener de {2} a {1} letras")]
         public string descripcion { get; set; }
-
         public bool activo { get; set; }
         public Categoria()
         {
